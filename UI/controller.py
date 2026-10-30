@@ -30,7 +30,7 @@ class Controller:
     # Altre Funzioni Event Handler
     def mostra_strumenti(self,e):
         self._view.lista_strumenti.controls.clear()
-
+        # Recupera la lista degli strumenti dal modello
         strumenti = self._model.get_strumenti()
 
         if not strumenti:
@@ -42,6 +42,7 @@ class Controller:
                 self._view.lista_strumenti.controls.append(
                     ft.Text(str(s))
                 )
+        # Aggiunta degli strumenti alla lista e aggiornamento della view
         self._view.update()
 
     def cerca_strumenti ( self,e):
@@ -53,6 +54,7 @@ class Controller:
             self._view.show_alert(" Attenzione, inserisci un tipo di strumento valido")
             return
 
+        # Interroga il modello filtrando per tipo
         strumenti = self._model.cerca_strumenti_per_tipo(tipo)
 
         if not strumenti:
