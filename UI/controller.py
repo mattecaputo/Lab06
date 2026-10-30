@@ -45,3 +45,24 @@ class Controller:
         self._view.update()
 
     def cerca_strumenti ( self,e):
+
+        tipo = self._view.input_tipo_strumento.value.strip()
+        self._view.lista_strumenti.controls.clear()
+
+        if not tipo or tipo.isdigit():
+            self._view.show_alert(" Attenzione, inserisci un tipo di strumento valido")
+            return
+
+        strumenti = self._model.cerca_strumenti_per_tipo(tipo)
+
+        if not strumenti:
+            self._view.lista_strumenti_ricerca.controls.append(
+                ft.Text(f" Nessuno strumento trovato per il tipo {tipo} ")
+            )
+        else:
+            for s in strumenti:
+                self._view.lista_strumenti_ricerca.controls.append(
+                    ft.Text(str(s))
+                )
+
+        self._view.update()
