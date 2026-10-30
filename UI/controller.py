@@ -28,4 +28,20 @@ class Controller:
         self._view.update()
 
     # Altre Funzioni Event Handler
-    # TODO
+    def mostra_strumenti(self,e):
+        self._view.lista_strumenti.controls.clear()
+
+        strumenti = self._model.get_strumenti()
+
+        if not strumenti:
+            self._view.lista_strumenti.controls.append(
+                ft.Text( " Nessuno strumento trovato nel database ")
+            )
+        else:
+            for s in strumenti:
+                self._view.lista_strumenti.controls.append(
+                    ft.Text(str(s))
+                )
+        self._view.update()
+
+    def cerca_strumenti ( self,e):
