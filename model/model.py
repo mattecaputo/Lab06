@@ -37,18 +37,18 @@ class DepositoStrumenti:
             :return: una lista con tutti gli strumenti presenti oppure None
         """
 
-        cnx = database.DB_connect.get_connection()
+        cnx = database.DB_connect.get_connection()   #tentativo di connessione al database
         if cnx is None:
             print("Errore nella connessione al database")
             return None
         cursor = cnx.cursor(dictionary=True)
         query = "SELECT * FROM strumento"
-        cursor.execute(query)
+        cursor.execute(query)                        # esecuzione della query
         result = []
 
         for row in cursor:
             strumento = Strumento(**row)
-            result.append(strumento)
+            result.append(strumento)                 # aggiunta degli strumenti in result
 
         cursor.close()
         cnx.close()
@@ -63,13 +63,13 @@ class DepositoStrumenti:
             :return: una lista con tutti gli strumenti del tipo indicato oppure None
         """
 
-        cnx = database.DB_connect.get_connection()
+        cnx = database.DB_connect.get_connection()                  # Tentativo di connessione al db
         if cnx is None:
             print("Errore nella connessione al database")
             return None
         cursor = cnx.cursor(dictionary=True)
         query = "SELECT * FROM strumento WHERE tipo = %s"
-        cursor.execute(query, (tipo,))
+        cursor.execute(query, (tipo,))                              # Esecuzione della query
         result = []
 
         for row in cursor:
